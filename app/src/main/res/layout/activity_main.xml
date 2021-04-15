@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+        <data>
+            <import type="com.example.birdcounter.data.Counter"/>
+            <variable
+                name="viewModel"
+                type="com.example.birdcounter.viewmodels.MainViewModel" />
+        </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <TextView
+            android:id="@+id/tvCounter"
+            android:gravity="center"
+            android:textSize="@dimen/textsize_xlarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            bind:setBackgroundColor="@{viewModel.currentColorLD.colorValue}"
+            android:text="@{@string/tv_counter_value(viewModel.currentCounterLD ?? 0)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:text="@string/blue"
+            android:onClick="@{() -> viewModel.incrementCounter(Counter.BLUE.key)}"
+            app:backgroundTint="@android:color/holo_blue_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnGreen" />
+
+        <Button
+            android:id="@+id/btnGray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gray"
+            app:backgroundTint="@android:color/darker_gray"
+            android:layout_margin="@dimen/margin_medium"
+            android:onClick="@{() -> viewModel.incrementCounter(Counter.GRAY.key)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRed" />
+
+        <Button
+            android:id="@+id/btnGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/green"
+            app:backgroundTint="@android:color/holo_green_light"
+            android:layout_margin="@dimen/margin_medium"
+            android:onClick="@{() -> viewModel.incrementCounter(Counter.GREEN.key)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCounter" />
+
+        <Button
+            android:id="@+id/btnRed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/red"
+            app:backgroundTint="@android:color/holo_red_dark"
+            android:onClick="@{() -> viewModel.incrementCounter(Counter.RED.key)}"
+            android:layout_margin="@dimen/margin_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBlue" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.resetCounter(viewModel.currentColorLD.key)}"
+            android:text="@string/reset"
+            android:layout_margin="@dimen/margin_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnGray" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
